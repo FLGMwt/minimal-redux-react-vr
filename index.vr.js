@@ -6,8 +6,10 @@ import {
   Text,
   View,
 } from 'react-vr';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-export default class App extends React.Component {
+export class App extends React.Component {
   render() {
     let textStyle = {
       backgroundColor: '#777879',
@@ -32,4 +34,16 @@ export default class App extends React.Component {
   }
 };
 
-AppRegistry.registerComponent('redux_vr', () => App);
+export let reducer = (state = 0, action) => state;
+
+export default class Root extends React.Component {
+  render() {
+    return (
+      <Provider store={createStore(reducer)}>
+        <App />
+      </Provider>
+    );
+  }
+};
+
+AppRegistry.registerComponent('redux_vr', () => Root);
