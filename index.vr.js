@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-vr';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 
 export class App extends React.Component {
   render() {
@@ -27,12 +27,16 @@ export class App extends React.Component {
         <Pano source={asset('chess-world.jpg')}/>
         <Text
           style={textStyle}>
-          Hello there!
+          Hello there! {this.props.count}
         </Text>
       </View>
     );
   }
 };
+
+export let ConnectedApp = connect(
+  (state) => ({count: state})
+)(App);
 
 export let reducer = (state = 0, action) => state;
 
@@ -40,7 +44,7 @@ export default class Root extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
-        <App />
+        <ConnectedApp />
       </Provider>
     );
   }
