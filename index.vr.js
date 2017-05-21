@@ -26,6 +26,7 @@ export class App extends React.Component {
       <View>
         <Pano source={asset('chess-world.jpg')}/>
         <Text
+          onInput={this.props.increment}
           style={textStyle}>
           Hello there! {this.props.count}
         </Text>
@@ -34,8 +35,11 @@ export class App extends React.Component {
   }
 };
 
+export let increment = () => ({type: 'INCREMENT'});
+
 export let ConnectedApp = connect(
-  (state) => ({count: state})
+  (state) => ({count: state}),
+  {increment}
 )(App);
 
 export let reducer = (state = 0, action) => {
