@@ -38,7 +38,14 @@ export let ConnectedApp = connect(
   (state) => ({count: state})
 )(App);
 
-export let reducer = (state = 0, action) => state;
+export let reducer = (state = 0, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    default:
+      return state;
+  }
+};
 
 export default class Root extends React.Component {
   render() {
